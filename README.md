@@ -1,6 +1,6 @@
 # CPB Floor Price Discord Bot
 
-###Installation
+### Installation
 ```
 git clone https://github.com/Quertyy/cpb-discord-bot-ebisus
 cd cpb-discord-bot-ebisus/
