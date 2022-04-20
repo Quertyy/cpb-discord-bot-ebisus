@@ -16,10 +16,23 @@ bot.remove_command("help")
 @tasks.loop(minutes=1)
 async def getFloorPrice():
     url        = "https://api.ebisusbay.com/collections?collection=0x939b90c529F0e3a2C187E1b190Ca966a95881FDe"
+    url2       = "https://api.ebisusbay.com/collections?collection=0xc843f18d5605654391e7eDBEa250f6838C3e8936"
     try:
         response = requests.request("GET", url).json()
-        floorPrice = response["collections"][0]['floorPrice']
-        await bot.change_presence(activity=discord.Game(name='Floor price: {} CRO'.format(floorPrice)))
+        response2 = requests.request("GET", url2).json()
+        floorPriceCMB = response["collections"][0]['floorPrice']
+        floorPriceCGB = response2["collections"][0]['floorPrice']
+        await bot.change_presence(activity=discord.Game(name='FP CMB: {} CRO\nFP CGB: {} CRP'.format(floorPriceCMB, floorPriceCGB)))
+    except:
+        pass
+
+@tasks.loop(minutes=1)
+@bot.command(name='volume')
+async def getVolume():
+    url       = "https://api.ebisusbay.com/collections?collection=0x939b90c529F0e3a2C187E1b190Ca966a95881FDe"
+    try:
+        response = requests.request("GET", url).json()
+        volume = response["collections"][0]['totalVolume']
     except:
         pass
     
